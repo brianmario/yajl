@@ -310,7 +310,9 @@ yajl_do_parse(yajl_handle hand, const unsigned char * jsonText,
             {
                 yajl_state s = yajl_bs_current(hand->stateStack);
                 if (s == yajl_state_start) {
-                    yajl_bs_set(hand->stateStack, yajl_state_parse_complete);
+                    // HACK: is this even safe to do?
+                    // yajl_bs_set(hand->stateStack, yajl_state_parse_complete);
+                    yajl_reset_parser(hand);
                 } else if (s == yajl_state_map_need_val) {
                     yajl_bs_set(hand->stateStack, yajl_state_map_got_val);
                 } else { 
