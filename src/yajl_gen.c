@@ -170,10 +170,8 @@ yajl_gen_free(yajl_gen g)
             break;                                  \
     }                                               \
 
-#define FINAL_NEWLINE                                        \
-    if (g->state[g->depth] == yajl_gen_start)                \
-        g->print(g->buf, "\n", 1);
-   
+#define FINAL_NEWLINE
+    
 yajl_gen_status
 yajl_gen_integer(yajl_gen g, long int number)
 {
@@ -218,12 +216,17 @@ yajl_gen_number(yajl_gen g, const char * s, unsigned int l)
 
 yajl_gen_status
 yajl_gen_string(yajl_gen g, const unsigned char * str,
-                unsigned int len)
+                unsigned int len, int quote)
 {
     ENSURE_VALID_STATE; INSERT_SEP; INSERT_WHITESPACE;
-    g->print(g->ctx, "\"", 1);
-    yajl_string_encode2(g->print, g->ctx, str, len);
-    g->print(g->ctx, "\"", 1);
+    if (quote) {
+        yajl_buf_append(g->buf, "\"", 1);
+        yajl_string_encode(g->buf, str, len);
+        yajl_buf_append(g->buf, "\"", 1);
+    } else {
+        yajl_buf_append(g->buf, str, len);
+    }
+    
     APPENDED_ATOM;
     FINAL_NEWLINE;
     return yajl_gen_status_ok;
