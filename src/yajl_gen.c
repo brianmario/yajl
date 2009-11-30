@@ -220,12 +220,17 @@ yajl_gen_string(yajl_gen g, const unsigned char * str,
 {
     ENSURE_VALID_STATE; INSERT_SEP; INSERT_WHITESPACE;
     if (quote) {
-        yajl_buf_append(g->buf, "\"", 1);
-        yajl_string_encode(g->buf, str, len);
-        yajl_buf_append(g->buf, "\"", 1);
+        g->print(g->ctx, "\"", 1);
+        yajl_string_encode2(g->print, g->ctx, str, len);
+        g->print(g->ctx, "\"", 1);
     } else {
-        yajl_buf_append(g->buf, str, len);
+        yajl_string_encode2(g->print, g->ctx, str, len);
     }
+    
+    
+    APPENDED_ATOM;
+    FINAL_NEWLINE;
+    return yajl_gen_status_ok;
     
     APPENDED_ATOM;
     FINAL_NEWLINE;
