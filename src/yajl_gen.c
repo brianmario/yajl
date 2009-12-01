@@ -224,7 +224,7 @@ yajl_gen_string(yajl_gen g, const unsigned char * str,
         yajl_string_encode2(g->print, g->ctx, str, len);
         g->print(g->ctx, "\"", 1);
     } else {
-        yajl_string_encode2(g->print, g->ctx, str, len);
+        g->print(g->ctx, (const char *)str, len);
     }
     
     
