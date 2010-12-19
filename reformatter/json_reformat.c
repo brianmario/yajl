@@ -62,7 +62,7 @@ static int reformat_string(void * ctx, const unsigned char * stringVal,
                            unsigned int stringLen)
 {
     yajl_gen g = (yajl_gen) ctx;
-    yajl_gen_string(g, stringVal, stringLen, 1);
+    yajl_gen_string(g, stringVal, stringLen);
     return 1;
 }
 
@@ -70,7 +70,7 @@ static int reformat_map_key(void * ctx, const unsigned char * stringVal,
                             unsigned int stringLen)
 {
     yajl_gen g = (yajl_gen) ctx;
-    yajl_gen_string(g, stringVal, stringLen, 1);
+    yajl_gen_string(g, stringVal, stringLen);
     return 1;
 }
 
