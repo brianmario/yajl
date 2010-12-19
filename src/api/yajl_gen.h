@@ -132,8 +132,7 @@ extern "C" {
                                              unsigned int len);
     YAJL_API yajl_gen_status yajl_gen_string(yajl_gen hand,
                                              const unsigned char * str,
-                                             unsigned int len,
-                                             int quote);
+                                             unsigned int len);
     YAJL_API yajl_gen_status yajl_gen_null(yajl_gen hand);
     YAJL_API yajl_gen_status yajl_gen_bool(yajl_gen hand, int boolean);
     YAJL_API yajl_gen_status yajl_gen_map_open(yajl_gen hand);
