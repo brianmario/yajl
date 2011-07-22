@@ -359,3 +359,11 @@ yajl_gen_clear(yajl_gen g)
 {
     if (g->print == (yajl_print_t)&yajl_buf_append) yajl_buf_clear((yajl_buf)g->ctx);
 }
+
+void
+yajl_gen_reset(yajl_gen g)
+{
+    yajl_gen_clear(g);
+    g->depth = 0;
+    g->state[g->depth] = yajl_gen_start;
+}
