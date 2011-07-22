@@ -53,7 +53,11 @@ extern "C" {
         /** returned from yajl_gen_string() when the yajl_gen_validate_utf8
          *  option is enabled and an invalid was passed by client code.
          */
-        yajl_gen_invalid_string
+        yajl_gen_invalid_string,
+        /** returned if an array or map closure is attempted before
+          * being opened
+          */
+        yajl_gen_invalid_close
     } yajl_gen_status;
 
     /** an opaque handle to a generator */
