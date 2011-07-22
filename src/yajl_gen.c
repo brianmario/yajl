@@ -354,5 +354,6 @@ yajl_gen_reset(yajl_gen g)
 {
     yajl_gen_clear(g);
     g->depth = 0;
+    memset(&g->state, 0, YAJL_MAX_DEPTH);
     g->state[g->depth] = yajl_gen_start;
 }
